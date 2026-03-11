@@ -197,7 +197,11 @@ export default function YottaVibesHomepage() {
             ))}
           </nav>
 
-            <PrimaryButton className="hidden md:inline-flex">Get in Touch</PrimaryButton>
+            <a href="#contact">
+              <PrimaryButton className="hidden md:inline-flex">
+                Get in Touch
+              </PrimaryButton>
+            </a>
           </div>
         </header>
 
@@ -246,12 +250,16 @@ export default function YottaVibesHomepage() {
                 transition={{ duration: 0.9, delay: 0.3 }}
                 className="mt-6 flex flex-wrap gap-4"
               >
-                <PrimaryButton>
-                  <span className="inline-flex items-center">
-                    Explore Our Platforms <ArrowRight className="ml-2 h-4 w-4" />
-                  </span>
-                </PrimaryButton>
-                <SecondaryButton>Partner With Us</SecondaryButton>
+                <a href="#products">
+                  <PrimaryButton>
+                    <span className="inline-flex items-center">
+                      Explore Our Platforms <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
+                  </PrimaryButton>
+                </a>
+                <a href="#partners">
+                  <SecondaryButton>Partner With Us</SecondaryButton>
+                </a>
               </motion.div>
 
               <div className="mt-6 hidden gap-4 sm:grid-cols-3">
@@ -511,6 +519,6 @@ export default function YottaVibesHomepage() {
           </div>
         </footer>
       </div>
-    </div>
+    </div>    
   );
 }
