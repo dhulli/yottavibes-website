@@ -5,7 +5,10 @@ export const metadata: Metadata = {
   title: "YottaVibes | Excellence through AI",
   description:
     "YottaVibes builds AI-powered learning platforms that help learners achieve mastery faster through focused preparation and intelligent practice.",
-  openGraph: {
+   icons: {
+    icon: "/favicon.svg",
+   },
+    openGraph: {
     title: "YottaVibes",
     description:
       "AI-powered learning platforms for faster mastery and better outcomes.",

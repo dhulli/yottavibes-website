@@ -16,6 +16,8 @@ import {
   GraduationCap,
 } from "lucide-react";
 
+import Link from "next/link";
+
 const capabilities = [
   {
     title: "Core-Intent Learning",
@@ -166,18 +168,22 @@ function SecondaryButton({
 
 export default function YottaVibesHomepage() {
   return (
-    <div className="min-h-screen bg-[#050B18] text-white">
+    <div id="top" className="min-h-screen bg-[#050B18] text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.14),transparent_28%),radial-gradient(circle_at_top_right,rgba(124,58,237,0.12),transparent_30%),linear-gradient(to_bottom,#050B18,#081120,#050B18)]" />
       <div className="relative">
         <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050B18]/70 backdrop-blur-xl">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-1.5 lg:px-8">
-            <div className="flex items-center">
+            <a
+              href="#top"
+              className="flex items-center"
+              aria-label="Go to top"
+            >
               <img
                 src="/yottavibes-logo.png"
                 alt="YottaVibes logo"
                 className="h-16 w-auto object-contain sm:h-20"
               />
-            </div>
+            </a>
 
             <nav className="hidden items-center gap-8 text-sm md:flex">
             {[
@@ -501,8 +507,12 @@ export default function YottaVibesHomepage() {
                 </div>
               </div>
               <div className="mt-8 flex flex-wrap gap-4">
-                <PrimaryButton>Contact Us</PrimaryButton>
-                <SecondaryButton>Learn More</SecondaryButton>
+                <a href="mailto:contact@yottavibes.com">
+                  <PrimaryButton>Contact Us</PrimaryButton>
+                </a>
+                <a href="#about">
+                  <SecondaryButton>Learn More</SecondaryButton>
+                </a>
               </div>
             </div>
           </div>
