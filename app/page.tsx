@@ -14,6 +14,8 @@ import {
   Award,
   Mail,
   GraduationCap,
+  Menu,
+  X,
 } from "lucide-react";
 
 const capabilities = [
@@ -180,16 +182,28 @@ export default function YottaVibesHomepage() {
     }),
     [mousePosition]
   );
+  
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { label: "Who We Are", href: "#about" },
+    { label: "What We Do", href: "#capabilities" },
+    { label: "Products", href: "#products" },
+    { label: "Partners", href: "#partners" },
+    { label: "Contact", href: "#contact" },
+  ];
+
   return (
     <div id="top" className="min-h-screen bg-[#050B18] text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.14),transparent_28%),radial-gradient(circle_at_top_right,rgba(124,58,237,0.12),transparent_30%),linear-gradient(to_bottom,#050B18,#081120,#050B18)]" />
       <div className="relative">
-        <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050B18]/70 backdrop-blur-xl">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-1.5 lg:px-8">
+        <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050B18]/70 backdrop-blur-xl">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 lg:px-8">
             <a
               href="#top"
               className="flex items-center"
               aria-label="Go to top"
+              onClick={() => setMobileMenuOpen(false)}
             >
               <img
                 src="/yottavibes-logo.png"
@@ -199,29 +213,56 @@ export default function YottaVibesHomepage() {
             </a>
 
             <nav className="hidden items-center gap-8 text-sm md:flex">
-            {[
-              { label: "Who We Are", href: "#about" },
-              { label: "What We Do", href: "#capabilities" },
-              { label: "Products", href: "#products" },
-              { label: "Partners", href: "#partners" },
-              { label: "Contact", href: "#contact" },
-            ].map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="relative text-white/70 transition duration-300 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-cyan-300 after:to-violet-400 after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="relative text-white/70 transition duration-300 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-cyan-300 after:to-violet-400 after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
 
-            <a href="#contact">
-              <PrimaryButton className="hidden md:inline-flex">
-                Get in Touch
-              </PrimaryButton>
-            </a>
+            <div className="hidden md:block">
+              <a href="#contact">
+                <PrimaryButton>Get in Touch</PrimaryButton>
+              </a>
+            </div>
+
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-2 text-white transition hover:bg-white/10 md:hidden"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
+
+          {mobileMenuOpen && (
+            <div className="border-t border-white/10 bg-[#081120]/95 backdrop-blur-xl md:hidden">
+              <div className="mx-auto flex max-w-7xl flex-col px-6 py-4">
+                {navItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-xl px-3 py-3 text-white/80 transition hover:bg-white/5 hover:text-white"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+
+                <div className="mt-3">
+                  <a href="#contact" onClick={() => setMobileMenuOpen(false)}>
+                    <PrimaryButton className="w-full justify-center">Get in Touch</PrimaryButton>
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
         </header>
         <section
           className="relative overflow-hidden px-6 pt-0 lg:px-8"
