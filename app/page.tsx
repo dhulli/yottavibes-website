@@ -61,43 +61,43 @@ const certificationAreas = ["AI Certifications", "Vibe Coding Certifications"];
 
 function OrbitLogo() {
   return (
-    <div className="relative mx-auto h-[300px] w-[300px] sm:h-[360px] sm:w-[360px] lg:h-[420px] lg:w-[420px]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.18),transparent_68%)] blur-[90px]" />
+    <div className="relative mx-auto h-[170px] w-[170px] sm:h-[260px] sm:w-[260px] lg:h-[420px] lg:w-[420px] overflow-visible">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.12),transparent_68%)] blur-[55px] sm:blur-[90px]" />
 
       <motion.div
-        className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.28),rgba(124,58,237,0.16),transparent_72%)] blur-3xl"
-        animate={{ scale: [1, 1.08, 1], opacity: [0.65, 1, 0.65] }}
+        className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.18),rgba(124,58,237,0.10),transparent_72%)] blur-xl sm:blur-3xl"
+        animate={{ scale: [1, 1.04, 1], opacity: [0.6, 0.85, 0.6] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {[0, 1].map((ring) => (
         <motion.div
           key={ring}
-          className="absolute left-1/2 top-1/2 rounded-full border border-white/15"
+          className="absolute left-1/2 top-1/2 rounded-full border border-white/12"
           style={{
-            width: `${220 + ring * 36}px`,
-            height: `${140 + ring * 20}px`,
-            transform: `translate(-50%, -50%) rotate(${ring * 22 + 10}deg)`,
+            width: ring === 0 ? "132px" : "156px",
+            height: ring === 0 ? "82px" : "96px",
+            transform: `translate(-50%, -50%) rotate(${ring * 20 + 10}deg)`,
           }}
-          animate={{ rotate: [ring * 22 + 10, ring * 22 + 370] }}
-          transition={{ duration: 24 + ring * 8, repeat: Infinity, ease: "linear" }}
+          animate={{ rotate: [ring * 20 + 10, ring * 20 + 370] }}
+          transition={{ duration: 22 + ring * 8, repeat: Infinity, ease: "linear" }}
         />
       ))}
 
       {[
-        { size: 12, top: "18%", left: "16%", delay: 0 },
-        { size: 10, top: "26%", right: "14%", delay: 1.2 },
-        { size: 14, bottom: "20%", right: "18%", delay: 2.1 },
-        { size: 10, bottom: "16%", left: "20%", delay: 3.0 },
+        { size: 8, top: "18%", left: "16%", delay: 0 },
+        { size: 7, top: "26%", right: "14%", delay: 1.2 },
+        { size: 8, bottom: "20%", right: "18%", delay: 2.1 },
+        { size: 7, bottom: "16%", left: "20%", delay: 3.0 },
       ].map((node, index) => (
         <motion.div
           key={index}
-          className="absolute rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 shadow-[0_0_28px_rgba(99,102,241,0.9)]"
+          className="absolute rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 shadow-[0_0_14px_rgba(99,102,241,0.55)] sm:shadow-[0_0_28px_rgba(99,102,241,0.9)]"
           style={node as React.CSSProperties}
           animate={{
-            scale: [1, 1.22, 1],
-            opacity: [0.7, 1, 0.7],
-            y: [0, -6, 0],
+            scale: [1, 1.1, 1],
+            opacity: [0.65, 1, 0.65],
+            y: [0, -3, 0],
           }}
           transition={{ duration: 3.5, delay: node.delay, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -107,13 +107,13 @@ function OrbitLogo() {
 
       <motion.div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        animate={{ y: [0, -8, 0], scale: [1, 1.02, 1] }}
+        animate={{ y: [0, -4, 0], scale: [1, 1.015, 1] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
       >
         <img
           src="/yottavibes-logo.png"
           alt="YottaVibes logo"
-          className="h-28 w-auto object-contain sm:h-36 lg:h-40"
+          className="h-14 w-auto object-contain sm:h-24 lg:h-40"
         />
       </motion.div>
     </div>
@@ -208,7 +208,7 @@ export default function YottaVibesHomepage() {
               <img
                 src="/yottavibes-logo.png"
                 alt="YottaVibes logo"
-                className="h-16 w-auto object-contain sm:h-20"
+                className="h-12 w-auto object-contain sm:h-16 lg:h-20"
               />
             </a>
 
@@ -265,12 +265,14 @@ export default function YottaVibesHomepage() {
           )}
         </header>
         <section
-          className="relative overflow-hidden px-6 pt-0 lg:px-8"
-          onMouseMove={handleHeroMouseMove}
-        >
+            className="relative overflow-hidden px-6 pt-0 lg:px-8"
+            onMouseMove={(e) => {
+              if (window.innerWidth >= 1024) handleHeroMouseMove(e);
+            }}
+          >
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <motion.div
-              className="absolute left-[8%] top-[10%] h-[280px] w-[280px] rounded-full bg-cyan-400/20 blur-3xl sm:h-[360px] sm:w-[360px]"
+              className="absolute left-[8%] top-[10%] h-[180px] w-[180px] rounded-full bg-cyan-400/10 blur-2xl sm:h-[360px] sm:w-[360px] sm:bg-cyan-400/20 sm:blur-3xl"
               style={gradientStyle}
               animate={{
                 x: [0, 18, 0],
@@ -285,7 +287,7 @@ export default function YottaVibesHomepage() {
             />
 
             <motion.div
-              className="absolute right-[6%] top-[18%] h-[260px] w-[260px] rounded-full bg-violet-500/20 blur-3xl sm:h-[340px] sm:w-[340px]"
+              className="absolute right-[6%] top-[18%] h-[140px] w-[140px] rounded-full bg-violet-500/8 blur-xl sm:h-[340px] sm:w-[340px] sm:bg-violet-500/20 sm:blur-3xl"
               style={{
                 transform: `translate(${-mousePosition.x * 0.6}px, ${-mousePosition.y * 0.6}px)`,
               }}
@@ -303,7 +305,7 @@ export default function YottaVibesHomepage() {
 
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_60%)]" />
           </div>
-          <div className="relative z-10 mx-auto grid min-h-[calc(100vh-64px)] max-w-7xl items-center gap-6 lg:grid-cols-2">
+          <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-8 pt-4 pb-10 lg:min-h-[calc(100vh-80px)] lg:grid-cols-2 lg:items-center lg:gap-6 lg:pt-0 lg:pb-0">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -319,7 +321,7 @@ export default function YottaVibesHomepage() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="mt-6 max-w-2xl text-4xl font-semibold leading-[0.92] tracking-tight sm:text-5xl lg:text-[4rem]"
+                className="mt-4 max-w-2xl text-[2.35rem] font-semibold leading-[0.95] tracking-tight sm:text-5xl lg:text-[4rem]"
               >
                 Excellence
                 <br />
@@ -336,7 +338,7 @@ export default function YottaVibesHomepage() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.2 }}
-                className="mt-2 max-w-lg text-base leading-6 text-white/70 sm:text-lg"
+                className="mt-3 max-w-lg text-[15px] leading-6 text-white/70 sm:text-lg"
               >
                 YottaVibes uses AI to help learners achieve excellence faster. We build focused learning platforms that sharpen preparation, reduce wasted effort, and accelerate meaningful outcomes.
               </motion.p>
@@ -345,7 +347,7 @@ export default function YottaVibesHomepage() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.3 }}
-                className="mt-6 flex flex-wrap gap-4"
+                className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4"
               >
                 <a href="#products">
                   <PrimaryButton>
@@ -374,17 +376,22 @@ export default function YottaVibesHomepage() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.96, x: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0, y: [0, -6, 0] }}
-              transition={{ duration: 1.1, delay: 0.15, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-              className="relative flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.96, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15 }}
+              className="relative flex justify-center pt-2 pb-2 lg:pt-0 lg:pb-0"
             >
-              <OrbitLogo />
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <OrbitLogo />
+              </motion.div>
             </motion.div>
           </div>
         </section>
 
-        <section id="about" className="px-6 py-20 lg:px-8">
+        <section id="about" className="px-6 py-14 lg:px-8 lg:py-16">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <div className="text-sm uppercase tracking-[0.25em] text-cyan-300/80">Who we are</div>
@@ -403,7 +410,7 @@ export default function YottaVibesHomepage() {
           </div>
         </section>
 
-        <section className="px-6 py-20 lg:px-8">
+        <section className="px-6 py-14 lg:px-8 lg:py-16">
           <div className="mx-auto max-w-7xl rounded-[36px] border border-cyan-300/15 bg-gradient-to-br from-cyan-400/10 via-white/5 to-violet-500/10 p-8 sm:p-10 lg:p-14">
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75">
@@ -466,7 +473,7 @@ export default function YottaVibesHomepage() {
           </div>
         </section>
 
-        <section id="capabilities" className="px-6 py-20 lg:px-8">
+        <section id="capabilities" className="px-6 py-14 lg:px-8 lg:py-16">
           <div className="mx-auto max-w-7xl rounded-[36px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl sm:p-10 lg:p-12">
             <div className="max-w-3xl">
               <div className="text-sm uppercase tracking-[0.25em] text-violet-300/80">What we do</div>
@@ -502,7 +509,7 @@ export default function YottaVibesHomepage() {
           </div>
         </section>
 
-        <section id="products" className="px-6 py-20 lg:px-8">
+        <section id="products" className="px-6 py-14 lg:px-8 lg:py-16">
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <div className="text-sm uppercase tracking-[0.25em] text-cyan-300/80">Our products</div>
@@ -555,7 +562,7 @@ export default function YottaVibesHomepage() {
           </div>
         </section>
 
-        <section id="partners" className="px-6 py-20 lg:px-8">
+        <section id="partners" className="px-6 py-14 lg:px-8 lg:py-16">
           <div className="mx-auto max-w-7xl rounded-[36px] border border-cyan-300/15 bg-gradient-to-br from-cyan-400/10 via-white/5 to-violet-500/10 p-8 sm:p-10 lg:p-14">
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75">
@@ -576,7 +583,7 @@ export default function YottaVibesHomepage() {
           </div>
         </section>
 
-        <section id="contact" className="px-6 pb-20 pt-8 lg:px-8 lg:pb-28">
+        <section id="contact" className="px-6 pb-14 pt-6 lg:px-8 lg:pb-16">
           <div className="mx-auto grid max-w-7xl gap-8 rounded-[36px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl sm:p-10 lg:grid-cols-[1.15fr_0.85fr] lg:p-12">
             <div>
               <div className="text-sm uppercase tracking-[0.25em] text-cyan-300/80">Contact</div>
