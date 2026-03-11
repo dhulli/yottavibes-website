@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
 import {
@@ -15,8 +15,6 @@ import {
   Mail,
   GraduationCap,
 } from "lucide-react";
-
-import Link from "next/link";
 
 const capabilities = [
   {
@@ -167,6 +165,21 @@ function SecondaryButton({
 }
 
 export default function YottaVibesHomepage() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 18;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 18;
+    setMousePosition({ x, y });
+  };
+
+  const gradientStyle = useMemo(
+    () => ({
+      transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+    }),
+    [mousePosition]
+  );
   return (
     <div id="top" className="min-h-screen bg-[#050B18] text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.14),transparent_28%),radial-gradient(circle_at_top_right,rgba(124,58,237,0.12),transparent_30%),linear-gradient(to_bottom,#050B18,#081120,#050B18)]" />
@@ -210,9 +223,46 @@ export default function YottaVibesHomepage() {
             </a>
           </div>
         </header>
+        <section
+          className="relative overflow-hidden px-6 pt-0 lg:px-8"
+          onMouseMove={handleHeroMouseMove}
+        >
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <motion.div
+              className="absolute left-[8%] top-[10%] h-[280px] w-[280px] rounded-full bg-cyan-400/20 blur-3xl sm:h-[360px] sm:w-[360px]"
+              style={gradientStyle}
+              animate={{
+                x: [0, 18, 0],
+                y: [0, -12, 0],
+                scale: [1, 1.08, 1],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
 
-        <section className="relative overflow-hidden px-5 pt-0 lg:px-7">
-          <div className="mx-auto grid min-h-[calc(100vh-64px)] max-w-7xl items-center gap-6 lg:grid-cols-2">
+            <motion.div
+              className="absolute right-[6%] top-[18%] h-[260px] w-[260px] rounded-full bg-violet-500/20 blur-3xl sm:h-[340px] sm:w-[340px]"
+              style={{
+                transform: `translate(${-mousePosition.x * 0.6}px, ${-mousePosition.y * 0.6}px)`,
+              }}
+              animate={{
+                x: [0, -14, 0],
+                y: [0, 14, 0],
+                scale: [1, 1.06, 1],
+              }}
+              transition={{
+                duration: 12,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_60%)]" />
+          </div>
+          <div className="relative z-10 mx-auto grid min-h-[calc(100vh-64px)] max-w-7xl items-center gap-6 lg:grid-cols-2">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
